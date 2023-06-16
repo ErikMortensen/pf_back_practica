@@ -42,8 +42,8 @@ const { Game, Category, Mechanic, Thematic, Editorial, Language } = sequelize.mo
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews)
-Game.belongsToMany(Category, { through: 'GameCategory' });
-Category.belongsToMany(Game, { through: 'GameCategory' });
+Game.belongsToMany(Category, { through: 'GameCategory', timestamps: false });
+Category.belongsToMany(Game, { through: 'GameCategory', timestamps: false });
 
 Thematic.hasMany(Game);
 Game.belongsTo(Thematic);

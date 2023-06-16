@@ -38,7 +38,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 // En sequelize.models están todos los modelos importados como propiedades
 // Para relacionarlos hacemos un destructuring
-const { Category, Mechanic, Thematic } = sequelize.models;
+const { Game, Category, Mechanic, Thematic, Editorial, Language } = sequelize.models;
 
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews)
@@ -46,11 +46,16 @@ Game.belongsToMany(Category, { through: 'GameCategory' });
 Category.belongsToMany(Game, { through: 'GameCategory' });
 
 Thematic.hasMany(Game);
-Game.belongTo(Thematic);
+Game.belongsTo(Thematic);
 
 Mechanic.hasMany(Game);
-Game.belongTo(Thematic);
+Game.belongsTo(Thematic);
 
+Game.belongsToMany(Language, { through: 'GameLanguage' });
+Language.belongsToMany(Game, { through: 'GameLanguage' });
+
+Game.belongsTo(Editorial);
+Editorial.hasMany(Game);
 
 
 

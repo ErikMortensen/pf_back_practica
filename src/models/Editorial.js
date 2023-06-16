@@ -1,8 +1,8 @@
 const { DataTypes } = require("sequelize");
 
 module.exports = (sequelize) => {
-    sequelize.define("thematic", {
-        thematic_id: {
+    sequelize.define("editorial", {
+        editorial_id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true

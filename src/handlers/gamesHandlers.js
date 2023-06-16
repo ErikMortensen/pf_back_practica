@@ -1,4 +1,4 @@
-const { getGames, createGame } = require('../controllers/gamesController');
+const { getGames, createGame, updateGame } = require('../controllers/gamesController');
 
 const getGamesHandler = async (req, res) => {
     try {
@@ -15,9 +15,6 @@ const getGamesHandler = async (req, res) => {
 const createGamehandler = async (req, res) => {
     const { name, released, price, age, players, rating, stock, image, weight, playing_time, categoryName, thematicName, mechanicName, editorialName } = req.body;
 
-    console.log('req.body')
-    console.log(req.body)
-
     try {
         const newGame = await createGame(name, released, price, age, players, rating, stock, image, weight, playing_time, categoryName, thematicName, mechanicName, editorialName);
 
@@ -27,7 +24,22 @@ const createGamehandler = async (req, res) => {
     }
 };
 
+const updateGameHandler = async (req, res) => {
+    const { id } = req.params;
+    const { name, released, price, age, players, rating, stock, image, weight, playing_time, categoryName, thematicName, mechanicName, editorialName } = req.body;
+
+    try {
+        const game = await updateGame(id, name, released, price, age, players, rating, stock, image, weight, playing_time, categoryName, thematicName, mechanicName, editorialName);
+
+        res.status(200).json(game);
+
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+}
+
 module.exports = {
     getGamesHandler,
-    createGamehandler
+    createGamehandler,
+    updateGameHandler
 };
